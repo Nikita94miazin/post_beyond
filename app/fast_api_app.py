@@ -1,9 +1,11 @@
+import os
 from typing import Optional
 
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException
 from fastapi import FastAPI
 from fastapi_versioning import VersionedFastAPI
+from fastapi_sqlalchemy import DBSessionMiddleware
 
 from app.group.router import router as group_router
 from app.model.error.error import Error
@@ -25,6 +27,8 @@ SqlAlchemy ORM and oriented to demonstrate wide range of FastAPI possibilities a
         app.title = cls.__title
 
         versioned_app: FastAPI = VersionedFastAPI(app, enable_latest=True)
+
+        versioned_app.add_middleware(DBSessionMiddleware, db_url=os.environ["DATABASE_URL"])
 
         cls.install_exception_handler(versioned_app)
         return versioned_app

@@ -64,7 +64,7 @@ class Group(Base):
         self.status_id: int = StatusConstant.active.value
 
     def change_status(self, status: StatusConstant) -> None:
-        self.status_id = status.value
+        self.status_id: int = status.value
 
 
 class UserGroup(Base):

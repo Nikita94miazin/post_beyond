@@ -18,7 +18,7 @@ class GroupDataProcessor:
         existing_group: Group = GroupDbExecutor.get_group_by_name(group_new_in.name)
 
         if existing_group:
-            raise Error.group_already_exist
+            raise Error.group_already_exists
 
         group_id: int = GroupDbExecutor.create_group(group_new_in)
 
@@ -32,7 +32,7 @@ class GroupDataProcessor:
         group: Optional[Group] = GroupDbExecutor.get_group_by_id(group_id)
 
         if not group:
-            raise Error.group_not_exist
+            raise Error.group_not_exists
 
         GroupDbExecutor.edit_group(group, group_in)
 
@@ -43,12 +43,12 @@ class GroupDataProcessor:
         is_status_exist: bool = StatusConstant.has_value(status_id)
 
         if not is_status_exist:
-            raise Error.status_not_exist
+            raise Error.status_not_exists
 
         group: Optional[Group] = GroupDbExecutor.get_group_by_id(group_id)
 
         if not group:
-            raise Error.group_not_exist
+            raise Error.group_not_exists
 
         GroupDbExecutor.change_group_status(group, status_id)
 

@@ -29,7 +29,7 @@ class UserDataProcessor:
         group: Group = get_group_by_id(user_new_in.group_id)
 
         if not group:
-            raise Error.group_not_exist
+            raise Error.group_not_exists
 
         user_id: int = UserDbExecutor.create_user(user_new_in)
 
@@ -43,7 +43,7 @@ class UserDataProcessor:
         user: User = UserDbExecutor.get_user_by_id(user_id)
 
         if not user:
-            raise Error.user_not_exist
+            raise Error.user_not_exists
 
         UserDbExecutor.delete_user(user)
 
@@ -54,12 +54,12 @@ class UserDataProcessor:
         is_status_exist: bool = StatusConstant.has_value(status_id)
 
         if not is_status_exist:
-            raise Error.status_not_exist
+            raise Error.status_not_exists
 
         user: User = UserDbExecutor.get_user_by_id(user_id)
 
         if not user:
-            raise Error.user_not_exist
+            raise Error.user_not_exists
 
         UserDbExecutor.change_user_status(user, status_id)
 
@@ -70,12 +70,12 @@ class UserDataProcessor:
         user: User = UserDbExecutor.get_user_by_id(user_id)
 
         if not user:
-            raise Error.user_not_exist
+            raise Error.user_not_exists
 
         group: Group = get_group_by_id(group_id)
 
         if not group:
-            raise Error.group_not_exist
+            raise Error.group_not_exists
 
         user_group: UserGroup = UserDbExecutor.get_user_group(user_id, group_id)
 
@@ -91,12 +91,12 @@ class UserDataProcessor:
         user: User = UserDbExecutor.get_user_by_id(user_id)
 
         if not user:
-            raise Error.user_not_exist
+            raise Error.user_not_exists
 
         group: Group = get_group_by_id(group_id)
 
         if not group:
-            raise Error.group_not_exist
+            raise Error.group_not_exists
 
         user_group: UserGroup = UserDbExecutor.get_user_group(user_id, group_id)
 

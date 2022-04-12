@@ -24,6 +24,6 @@ class UserNewIn(CamelModel):
     @validator('role_id')
     def validate_user_role(cls, role_id: int) -> int:
         if not RoleConstant.has_value(role_id):
-            raise Error.role_not_exist
+            raise Error.role_not_exists
 
         return role_id

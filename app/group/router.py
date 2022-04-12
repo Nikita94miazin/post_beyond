@@ -93,7 +93,7 @@ def edit_group(group_id: int, status_id: int) -> Response:
 
 @router.get("/", response_model=List[DetailedGroupOut])
 @version(0, 1)
-def get_all_users() -> List[DetailedGroupOut]:
+def get_all_groups() -> List[DetailedGroupOut]:
     """
         ## Description
         Getting list of groups

@@ -43,7 +43,7 @@ class GroupDbExecutor(DbExecutor):
             raise Error.group_name_is_the_same
 
         if cls.get_group_by_name(new_name):
-            raise Error.group_already_exist
+            raise Error.group_already_exists
 
         group.name = new_name
 

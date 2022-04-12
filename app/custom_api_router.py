@@ -1,4 +1,5 @@
 from typing import Callable, Optional
+from http import HTTPStatus
 
 from fastapi import APIRouter
 
@@ -45,14 +46,14 @@ class CustomApiRouter(APIRouter):
 
         basic_model: dict = {
             "default": {
-                "description": f"Possible response statuses are {204 if status_code == 204 else 200}"
+                "description": f"Possible response statuses are {status_code}"
                                f" and 420 if some exception happens"
             },
             420: {
                 "content": {
                     "application/json": {
                         "example": {
-                            "code": 400,
+                            "code": HTTPStatus.BAD_REQUEST,
                             "message": "Request params have incorrect format"
                         }
                     }
@@ -61,8 +62,11 @@ class CustomApiRouter(APIRouter):
             }
         }
 
-        if status_code == 204:
-            basic_model.update({204: {"description": "Empty successful response body"}})
+        if status_code == HTTPStatus.NO_CONTENT:
+            basic_model.update({HTTPStatus.NO_CONTENT: {"description": "Empty successful response body"}})
+
+        if status_code == HTTPStatus.CREATED:
+            basic_model.update({HTTPStatus.CREATED: {"description": "Successfully created"}})
 
         if responses:
             basic_model = dict(basic_model, **responses)

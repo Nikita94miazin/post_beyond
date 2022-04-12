@@ -1,8 +1,8 @@
 """initial commit
 
-Revision ID: 50dc845da4f4
+Revision ID: 44850c58f408
 Revises: 
-Create Date: 2022-04-10 21:08:28.034698
+Create Date: 2022-04-12 13:43:45.929389
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '50dc845da4f4'
+revision = '44850c58f408'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,7 +34,8 @@ def upgrade():
     sa.Column('creation_date', sa.DateTime(), nullable=False),
     sa.Column('status_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['status_id'], ['Status.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     op.create_table('User',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -54,10 +55,16 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('group_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['group_id'], ['Group.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['Status.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['User.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
+
+    insert_initial_data()
+
+
+def insert_initial_data():
+    pass
 
 
 def downgrade():

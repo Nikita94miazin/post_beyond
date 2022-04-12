@@ -7,6 +7,9 @@ Create Date: 2022-04-12 13:43:45.929389
 """
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy import orm
+
+from app.model.db.schema import Role, Status
 
 
 # revision identifiers, used by Alembic.
@@ -64,7 +67,24 @@ def upgrade():
 
 
 def insert_initial_data():
-    pass
+    bind = op.get_bind()
+    session = orm.Session(bind=bind)
+
+    statuses = [
+        Status(name="Active"),
+        Status(name="Inactive")
+    ]
+
+    session.add_all(statuses)
+
+    roles = [
+        Role(name="User"),
+        Role(name="Admin")
+    ]
+
+    session.add_all(roles)
+
+    session.commit()
 
 
 def downgrade():

@@ -17,6 +17,17 @@ class FastAPIApp(FastAPI):
     __description: str = """
 It is a test user-group api for PostBeyond team. This api is created with help of FastAPI framework,
 SqlAlchemy ORM and oriented to demonstrate wide range of FastAPI possibilities and developer's skills.
+
+## Common errors
+Api includes several error types which could happen in every flow.
+So they won't be mentioned in every request description.
+There are several groups of common errors: request format validation, internal and session
+(it is based on user token which has expiration date,
+so your requests will be blocked if you try to use expired session token etc).
+
+- **400**: Request params have incorrect format
+- **404**: Source not found
+- **500**: Server error
 """
     __title: str = "PostBeyond"
 

@@ -19,6 +19,12 @@ depends_on = ${repr(depends_on)}
 def upgrade():
     ${upgrades if upgrades else "pass"}
 
+    insert_initial_data()
+
+
+def insert_initial_data():
+    pass
+
 
 def downgrade():
     ${downgrades if downgrades else "pass"}
